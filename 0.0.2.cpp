@@ -3,42 +3,42 @@
 #include <string>
 using namespace std;
 
-void sort (unsigned int *mas, unsigned int n, unsigned int sdvig){
-    int *mas_1 = new int [n-sdvig];
-    int *mas_2 = new int [sdvig];
+void sort (unsigned int *mas_A, unsigned int n, unsigned int sdvig){
+    int *mas_B = new int [n-sdvig];
+    int *mas_C = new int [sdvig];
  for(unsigned int i=0; i<n; ++i){
         if(i<n-sdvig){
-            mas_1[i]=mas[i];
+            mas_B[i]=mas_A[i];
         }
         else{
-            mas_2[i+sdvig-n]=mas[i];
+            mas_C[i+sdvig-n]=mas_A[i];
         }
     }
     for(unsigned int i=0; i<(n-sdvig)/2; ++i){
-        swap(mas_1[i], mas_1[n-sdvig-1-i]);
+        swap(mas_B[i], mas_B[n-sdvig-1-i]);
     }
     for(unsigned int i=0; i<sdvig/2; ++i){
-        swap(mas_2[i], mas_2[sdvig-1-i]);
+        swap(mas_C[i], mas_C[sdvig-1-i]);
     }
     for(unsigned int i=0; i<n; ++i){
         if(i<n-sdvig){
-            mas[i]=mas_1[i];
+            mas_A[i]=mas_B[i];
         }
         else{
-            mas[i]=mas_2[i+sdvig-n];
+            mas_A[i]=mas_C[i+sdvig-n];
         }
     }
     for(unsigned int i=0; i<n/2; ++i){
-        swap(mas[i], mas[n-1-i]);
+        swap(mas_A[i], mas_A[n-1-i]);
     }
 }
 
 int main() 
 { 
     unsigned int n; 
-    unsigned int *mas; 
+    unsigned int *mas_A; 
         if (cin >> n){
-            mas = new unsigned int [n];
+            mas_A = new unsigned int [n];
         } 
     else { 
         cout<<"An error has occurred while reading input data"<<endl; 
@@ -49,18 +49,18 @@ int main()
     getline (cin, stroka); 
     istringstream stream (stroka); 
         for (unsigned int i=0; i<n;i++){ 
-            if(!(stream >> mas[i])){ 
+            if(!(stream >> mas_A[i])){ 
                 cout<<"An error has occurred while reading input data"<<endl; 
-                delete[]mas; 
+                delete[]mas_A; 
                 return -1; 
             } 
         } 
     unsigned int sdvig;    
     cin >>  sdvig;   
-    sort (mas, n, sdvig); 
+    sort (mas_A, n, sdvig); 
         for(unsigned int i=0; i<n; i++){ 
-            cout << mas[i] << " "; 
+            cout << mas_A[i] << " "; 
         } 
-    delete[]mas; 
+    delete[]mas_A; 
     return 0; 
 }
