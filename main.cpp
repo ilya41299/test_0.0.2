@@ -9,40 +9,41 @@ void sort (int *mas, int n){
     }
 }
 
+bool proverka(int *mas, int n){
+    string stroka;
+    getline(cin, stroka);
+    istringstream stream(stroka);
+    for(unsigned int i=0; i<n; ++i){
+        if(!(stream>>mas[i])){
+            cout<<"An error has occured while reading input data."<<endl;
+            return false;
+        }
+    }
+    if(!(stream.eof())){
+        cout<<"An error has occured while reading input data."<<endl;
+        return false;
+    }
+}
+
 int main() 
 { 
-    int n; 
-    int *mas; 
-        if (cin >> n){
-            if (n < 0){
-            cout<<"An error has occurred while reading input data"<<endl; 
-            return -1; 
-            }   
-            mas = new int [n]; 
-        } 
-    else { 
-        cout<<"An error has occurred while reading input data"<<endl; 
-        return -1; 
-    } 
-    cin.get(); 
+    int n;  
     string stroka; 
     getline (cin, stroka); 
     istringstream stream (stroka); 
-        for (unsigned int i=0; i<n;i++){ 
-            if(!(stream >> mas[i])){ 
-                cout<<"An error has occurred while reading input data"<<endl; 
-                delete[]mas; 
-                return -1;     
-            } 
-            if(!(stream.eof())){
+        
+   if(!(stream>>n)||(n<0)){
         cout<<"An error has occured while reading input data."<<endl;
         return -1;
     }
-        } 
-    sort (mas, n); 
-        for(unsigned int i=0; i<n; i++){ 
-            cout << mas[i] << " "; 
-        } 
-    delete[]mas; 
+    
+   int *mas=new int[n];
+    if(proverka(mas, n)){
+        sort(mas, n);
+        for(unsigned int i=0; i<n; ++i){
+            cout<<mas[i]<<" ";
+        }
+    }
+    delete[]mas;
     return 0; 
 }
