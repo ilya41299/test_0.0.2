@@ -1,13 +1,18 @@
 #include <iostream>
 #include <sstream>
 #include <string>
-
 using namespace std;
 
+void otr(int *mas, int n, int h){
+    for(int i=0; i<h; ++i){
+        swap(mas[i], mas[n-i-1]);
+    }
+}
+
 bool proverka(int *mas, int n){
-    string str;
-    getline(cin, str);
-    istringstream stream(str);
+    string string;
+    getline(cin, string);
+    istringstream stream(string);
     for(int i=0; i<n; ++i){
         if(!(stream>>mas[i])){
             cout<<"An error has occured while reading input data."<<endl;
@@ -17,12 +22,6 @@ bool proverka(int *mas, int n){
     if(!(stream.eof())){
         cout<<"An error has occured while reading input data."<<endl;
         return false;
-    }
-}
-
-void otr(int *mas, int n){
-    for(int i=0; i<n/2; ++i){
-        swap(mas[i], mas[n-i-1]);
     }
 }
 
@@ -42,10 +41,12 @@ int main(){
         return -1;
     }
     
+    int h=n/2;
+    
     int *mas=new int[n];
     
     if(proverka(mas, n)){
-        otr(mas, n);
+        otr(mas, n, h);
         for(int i=0; i<n; ++i){
             cout<<mas[i]<<" ";
         }
